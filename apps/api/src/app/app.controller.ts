@@ -1,7 +1,7 @@
 import { Controller, Get } from '@nestjs/common';
 import { ApiOkResponse, ApiOperation, ApiTags } from '@nestjs/swagger';
-import { AppService } from './app.service';
-import { AppMessageResponseDto } from './dto/app-message-response.dto';
+import { AppService } from './app.service.js';
+import { AppMessageResponseDto } from './dto/app-message-response.dto.js';
 
 @ApiTags('app')
 @Controller()

@@ -5,14 +5,22 @@ import 'reflect-metadata';
  * This is only a minimal backend to get started.
  */
 
+import express from 'express';
 import { Logger } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
-import { AppModule } from './app/app.module';
-import { API_GLOBAL_PREFIX } from './swagger';
+import { toNodeHandler } from 'better-auth/node';
+import { auth } from './app/auth/auth.js';
+import { AppModule } from './app/app.module.js';
+import { API_GLOBAL_PREFIX } from './swagger.js';
 
 async function bootstrap() {
-  const app = await NestFactory.create(AppModule);
+  const app = await NestFactory.create(AppModule, { bodyParser: false });
+  const server = app.getHttpAdapter().getInstance();
+  server.all(/^\/api\/auth\/.*/, toNodeHandler(auth));
+  server.use(express.json());
+  server.use(express.urlencoded({ extended: true }));
   app.setGlobalPrefix(API_GLOBAL_PREFIX);
+
   const port = process.env.PORT || 3000;
   await app.listen(port);
   Logger.log(

@@ -1,78 +1,63 @@
 {
   "name": "@mentara-oe/api",
   "version": "0.0.1",
+  "type": "module",
   "private": true,
   "nx": {
     "targets": {
       "build": {
         "executor": "nx:run-commands",
+        "dependsOn": [
+          "prisma-generate"
+        ],
+        "outputs": [
+          "{workspaceRoot}/apps/api/dist"
+        ],
         "options": {
-          "command": "webpack-cli build",
-          "args": [
-            "--node-env=production"
-          ],
-          "cwd": "apps/api"
-        },
-        "configurations": {
-          "development": {
-            "args": [
-              "--node-env=development"
-            ]
-          }
+          "command": "rm -rf apps/api/dist && npx tsc --project apps/api/tsconfig.app.json"
         }
       },
-      "prune-lockfile": {
+      "prisma-generate": {
+        "executor": "nx:run-commands",
+        "outputs": [
+          "{workspaceRoot}/node_modules/.prisma/client"
+        ],
+        "options": {
+          "command": "npx prisma generate --schema apps/api/prisma/schema.prisma"
+        }
+      },
+      "prisma-migrate-dev": {
+        "executor": "nx:run-commands",
+        "outputs": [
+          "{workspaceRoot}/apps/api/prisma/migrations"
+        ],
+        "options": {
+          "command": "npx prisma migrate dev --schema apps/api/prisma/schema.prisma"
+        }
+      },
+      "prisma-migrate-deploy": {
+        "executor": "nx:run-commands",
+        "options": {
+          "command": "npx prisma migrate deploy --schema apps/api/prisma/schema.prisma"
+        }
+      },
+      "bootstrap-admin": {
+        "executor": "nx:run-commands",
         "dependsOn": [
           "build"
         ],
-        "cache": true,
-        "executor": "@nx/js:prune-lockfile",
-        "outputs": [
-          "{workspaceRoot}/apps/api/dist/package.json",
-          "{workspaceRoot}/apps/api/dist/package-lock.json"
-        ],
         "options": {
-          "buildTarget": "build"
+          "command": "node apps/api/dist/scripts/bootstrap-admin.js"
         }
-      },
-      "copy-workspace-modules": {
-        "dependsOn": [
-          "build"
-        ],
-        "cache": true,
-        "outputs": [
-          "{workspaceRoot}/apps/api/dist/workspace_modules"
-        ],
-        "executor": "@nx/js:copy-workspace-modules",
-        "options": {
-          "buildTarget": "build"
-        }
-      },
-      "prune": {
-        "dependsOn": [
-          "prune-lockfile",
-          "copy-workspace-modules"
-        ],
-        "executor": "nx:noop"
       },
       "serve": {
         "continuous": true,
-        "executor": "@nx/js:node",
-        "defaultConfiguration": "development",
+        "executor": "nx:run-commands",
         "dependsOn": [
           "build"
         ],
         "options": {
-          "buildTarget": "@mentara-oe/api:build",
-          "runBuildTargetDependencies": false
-        },
-        "configurations": {
-          "development": {
-            "buildTarget": "@mentara-oe/api:build:development"
-          },
-          "production": {
-            "buildTarget": "@mentara-oe/api:build:production"
-          }
+          "command": "node apps/api/dist/main.js"
         }
       },
       "test": {
@@ -82,8 +67,11 @@
       },
       "openapi": {
         "executor": "nx:run-commands",
+        "dependsOn": [
+          "build"
+        ],
         "options": {
-          "command": "npx ts-node --project apps/api/tsconfig.app.json apps/api/src/openapi.ts"
+          "command": "node apps/api/dist/openapi.js"
         },
         "outputs": [
           "{workspaceRoot}/apps/api/openapi.json"
@@ -93,14 +81,21 @@
   },
   "dependencies": {
     "@nestjs/common": "^11.0.0",
+    "@nestjs/config": "^4.0.2",
     "@nestjs/core": "^11.0.0",
     "@nestjs/platform-express": "^11.0.0",
     "@nestjs/swagger": "^11.2.1",
+    "@prisma/adapter-pg": "^7.5.0",
+    "@prisma/client": "^7.5.0",
+    "better-auth": "^1.3.4",
+    "pg": "^8.16.3",
     "reflect-metadata": "^0.1.13",
     "rxjs": "^7.8.0",
-    "tslib": "^2.3.0"
+    "tslib": "^2.3.0",
+    "zod": "^4.1.11"
   },
   "devDependencies": {
-    "@nestjs/testing": "^11.0.0"
+    "@nestjs/testing": "^11.0.0",
+    "prisma": "^7.5.0"
   }
 }

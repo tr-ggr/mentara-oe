@@ -1,5 +1,15 @@
 # MentaraOe
 
+## API auth + database setup
+
+The backend now uses Prisma v7 + Better Auth (admin plugin) on PostgreSQL.
+
+1. Copy `apps/api/.env.example` values into your env file and update secrets.
+2. Generate Prisma client: `npx nx run @mentara-oe/api:prisma-generate`
+3. Run migrations: `npx nx run @mentara-oe/api:prisma-migrate-dev`
+4. Seed the first admin: `npx nx run @mentara-oe/api:bootstrap-admin`
+5. Start API: `npx nx run @mentara-oe/api:serve`
+
 <a alt="Nx logo" href="https://nx.dev" target="_blank" rel="noreferrer"><img src="https://raw.githubusercontent.com/nrwl/nx/master/images/nx-logo.png" width="45"></a>
 
 ✨ Your new, shiny [Nx workspace](https://nx.dev) is ready ✨.
