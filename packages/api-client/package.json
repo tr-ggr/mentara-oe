@@ -1,0 +1,45 @@
+{
+  "name": "api-client",
+  "version": "0.0.1",
+  "nx": {
+    "targets": {
+      "generate": {
+        "executor": "nx:run-commands",
+        "options": {
+          "commands": [
+            "npx nx run @mentara-oe/api:openapi",
+            "npx orval --config orval.config.ts"
+          ],
+          "parallel": false
+        },
+        "outputs": [
+          "{workspaceRoot}/packages/api-client/src/lib/generated"
+        ]
+      }
+    }
+  },
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    "./package.json": "./package.json",
+    ".": {
+      "@mentara-oe/source": "./src/index.ts",
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.js",
+      "default": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "!**/*.tsbuildinfo"
+  ],
+  "dependencies": {
+    "tslib": "^2.3.0"
+  },
+  "peerDependencies": {
+    "@tanstack/react-query": "^5.71.10",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "openapi": "3.0.0",
+  "paths": {
+    "/api": {
+      "get": {
+        "operationId": "getAppMessage",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "description": "",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/AppMessageResponseDto"
+                }
+              }
+            }
+          }
+        },
+        "summary": "Get app message",
+        "tags": [
+          "app"
+        ]
+      }
+    }
+  },
+  "info": {
+    "title": "Mentara OE API",
+    "description": "OpenAPI definition for generated API client code.",
+    "version": "1.0.0",
+    "contact": {}
+  },
+  "tags": [],
+  "servers": [],
+  "components": {
+    "schemas": {
+      "AppMessageResponseDto": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string",
+            "example": "Hello API"
+          }
+        },
+        "required": [
+          "message"
+        ]
+      }
+    }
+  }
+}
