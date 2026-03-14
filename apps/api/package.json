@@ -23,7 +23,7 @@
           "{workspaceRoot}/node_modules/.prisma/client"
         ],
         "options": {
-          "command": "npx prisma generate --schema apps/api/prisma/schema.prisma"
+          "command": "npx prisma generate --schema apps/api/prisma"
         }
       },
       "prisma-migrate-dev": {
@@ -32,13 +32,13 @@
           "{workspaceRoot}/apps/api/prisma/migrations"
         ],
         "options": {
-          "command": "npx prisma migrate dev --schema apps/api/prisma/schema.prisma"
+          "command": "npx prisma migrate dev --schema apps/api/prisma"
         }
       },
       "prisma-migrate-deploy": {
         "executor": "nx:run-commands",
         "options": {
-          "command": "npx prisma migrate deploy --schema apps/api/prisma/schema.prisma"
+          "command": "npx prisma migrate deploy --schema apps/api/prisma"
         }
       },
       "bootstrap-admin": {
