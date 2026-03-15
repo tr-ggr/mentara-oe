@@ -1,11 +1,13 @@
 'use client';
 
+import { Theme } from '@radix-ui/themes';
 import {
   QueryClient,
   QueryClientProvider,
   isServer,
 } from '@tanstack/react-query';
 import { configureApiClient } from 'api-client';
+import { ThemeProvider } from 'next-themes';
 import type { ReactNode } from 'react';
 
 function makeQueryClient() {
@@ -40,6 +42,18 @@ export function Providers({ children }: { children: ReactNode }) {
   const queryClient = getQueryClient();
 
   return (
-    <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
+    <QueryClientProvider client={queryClient}>
+      <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+        <Theme
+          accentColor="green"
+          grayColor="gray"
+          panelBackground="solid"
+          radius="large"
+          scaling="100%"
+        >
+          {children}
+        </Theme>
+      </ThemeProvider>
+    </QueryClientProvider>
   );
 }

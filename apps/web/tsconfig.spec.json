@@ -18,7 +18,16 @@
     "src/**/*.spec.js",
     "src/**/*.test.jsx",
     "src/**/*.spec.jsx",
-    "src/**/*.d.ts"
+    "src/**/*.d.ts",
+    "specs/**/*.test.ts",
+    "specs/**/*.spec.ts",
+    "specs/**/*.test.tsx",
+    "specs/**/*.spec.tsx",
+    "specs/**/*.test.js",
+    "specs/**/*.spec.js",
+    "specs/**/*.test.jsx",
+    "specs/**/*.spec.jsx",
+    "specs/**/*.d.ts"
   ],
   "references": [
     {

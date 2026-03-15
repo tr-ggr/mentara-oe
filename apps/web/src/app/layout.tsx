@@ -1,3 +1,5 @@
+import '@radix-ui/themes/styles.css';
+import './theme-colors.css';
 import './global.css';
 import { Providers } from './providers';
 
@@ -12,7 +14,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <Providers>{children}</Providers>
       </body>
