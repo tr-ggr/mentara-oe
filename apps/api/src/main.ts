@@ -21,7 +21,7 @@ async function bootstrap() {
   server.use(express.urlencoded({ extended: true }));
   app.setGlobalPrefix(API_GLOBAL_PREFIX);
 
-  const port = process.env.PORT || 3000;
+  const port = process.env.PORT || 3001;
   await app.listen(port);
   Logger.log(
     `🚀 Application is running on: http://localhost:${port}/${API_GLOBAL_PREFIX}`,

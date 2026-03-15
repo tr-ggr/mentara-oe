@@ -4,11 +4,11 @@
   "license": "MIT",
   "scripts": {
     "generate-client": "npx nx run @mentara-oe/api:openapi && npx orval --config orval.config.ts",
-    "dev:api": "npx nx run @mentara-oe/api:serve",
-    "dev:web": "npx nx run @mentara-oe/web:dev",
+    "api": "npx nx run @mentara-oe/api:serve",
+    "web": "npx nx run @mentara-oe/web:dev",
     "generate:prisma": "npx nx run @mentara-oe/api:prisma-generate",
-    "migrate:dev": "npx nx run @mentara-oe/api:prisma-migrate-dev",
-    "db:reset": "npx nx run @mentara-oe/api:prisma-generate && npx prisma migrate reset --schema apps/api/prisma && npm run migrate:dev"
+    "db:migrate:dev": "npx nx run @mentara-oe/api:prisma-migrate-dev",
+    "db:reset": "npx nx run @mentara-oe/api:reset && npm run db:migrate:dev"
   },
   "private": true,
   "devDependencies": {

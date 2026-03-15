@@ -48,3 +48,5 @@ out
 test-output
 
 generated
+
+.env
