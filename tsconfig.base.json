@@ -15,7 +15,7 @@
     "noImplicitReturns": true,
     "noUnusedLocals": true,
     "paths": {
-      "api-client": ["packages/api-client/src/index.ts"]
+      "api-client": ["packages/api-client/src/index.source.js"]
     },
     "skipLibCheck": true,
     "strict": true,

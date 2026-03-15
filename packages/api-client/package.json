@@ -24,7 +24,7 @@
   "exports": {
     "./package.json": "./package.json",
     ".": {
-      "@mentara-oe/source": "./src/index.ts",
+      "@mentara-oe/source": "./src/index.source.js",
       "types": "./dist/index.d.ts",
       "import": "./dist/index.js",
       "default": "./dist/index.js"

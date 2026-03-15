@@ -8,6 +8,7 @@ const env = getRuntimeEnv();
 
 export const auth = betterAuth({
   baseURL: env.BETTER_AUTH_URL,
+  trustedOrigins: env.allowedOrigins,
   secret: env.BETTER_AUTH_SECRET,
   database: prismaAdapter(prisma, {
     provider: 'postgresql',

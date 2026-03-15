@@ -27,7 +27,7 @@ export function AppMessage() {
 
   return (
     <Text size="3" highContrast>
-      {data?.data.message ?? 'No message received.'}
+      {data?.message ?? 'No message received.'}
     </Text>
   );
 }
